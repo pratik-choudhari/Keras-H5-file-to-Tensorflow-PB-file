@@ -40,12 +40,15 @@ def animate():
         time.sleep(0.1)
 t = threading.Thread(target=animate)
 t.start()
-
-model = load_model(file)
+try: 
+	model = load_model(file)
+except OSError:
+	done = True
+	print('\nCan not read file, exiting')
+	sys.exit()
 
 time.sleep(10)
 done = True
-
 print('\nModel.outputs:')
 print(model.outputs)
 print('Model.inputs:')
